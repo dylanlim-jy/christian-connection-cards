@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: christian_connection_cards
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn christian_connection_cards.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
