@@ -7,23 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Hello Django on Render!</title>
-
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-          crossorigin="anonymous">
+    <title>Christian Connection Cards | Connect with your church family</title>
 </head>
 <body>
-<header class="container mt-4 mb-4">
-    <a href="https://render.com">
-        <img src="{% static "cards/render.png" %}" alt="Render" class="mw-100">
-    </a>
-</header>
 <main class="container">
     <div class="row text-center justify-content-center">
         <div class="col">
-            <h1 class="display-4">Hello World!</h1>
+            <h1 class="display-4">Hello!</h1>
+            <p>Here's how to play this game.</p>
+            <ol>
+                <li>Choose the number of cards you want to play per stage.</li>
+                <li>Answer the questions that show up on the cards.</li>
+                <li>At the end of the game, write a short note to each other. Don't read it until you have left the room!</li>
+            </ol>
+            <form method="post">
+                {% csrf_token %}
+                <!-- TODO add validation for min and max. Or actually, change it into a dropdown -->
+                <label for="num_cards">Number of cards per stage</label>
+                <input type="text" id="num_cards" name="num_cards" type="number" min="3" max="10" required>
+                <input type="submit" value="Submit">
+            </form>
+            
         </div>
     </div>
 </main>

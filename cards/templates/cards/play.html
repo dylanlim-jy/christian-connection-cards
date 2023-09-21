@@ -1,0 +1,38 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Christian Connection Cards | Play</title>
+</head>
+<body>
+
+<main class="container">
+    <div class="row text-center justify-content-center">
+        <div class="col">
+            <a href="{% url 'cards:index' %}">Go Home</a>
+            <h1 class="display-4">Let's play.</h1>
+            <p>You chose the following number of cards: {{ num_cards }}</p>
+        </div>
+        
+        {% if filtered_questions %}
+        <div class="col">
+        <p>Here's all the playable choices:</p>
+        {% for stage, question_list in filtered_questions.items %}
+            <p>{{ stage }}:</p>
+            <ol>
+                {% for question in question_list %}
+                <li>{{ question }}</li>
+                {% endfor %}
+            </ol>
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</main>
+</body>
+</html>
