@@ -7,7 +7,7 @@
 <section class="mx-auto px-20 min-w-5xl max-w-full py-20">
     <div class="hero h-fit">
         <div class="hero-content flex-col lg:flex-row gap-x-9">
-          <img src="{% static 'images/' %}{{ random_image }}" alt="Illustration of a human by Pablo Stanley" class="h-72 w-auto lg:h-auto lg:w-2/6" />
+          <img src="{% static 'images/' %}{{ random_image }}" alt="Illustration of a human by Pablo Stanley" class="h-72 w-auto lg:h-auto lg:w-2/6" />          
           <div class="lg:w-4/6 flex-col justify-start">
             <h1 class="text-5xl font-bold">A church card game designed for real connection.</h1>
             <p class="mt-4 mb-8">Get real with your brothers and sisters in Christ. Start asking each other questions that go beyond the norm.</p>
@@ -16,7 +16,7 @@
                     {% csrf_token %}
                     <div class="form-control w-full mb-4">
                         <label class="label flex-row gap-x-2 justify-start">
-                          <span class="label-text">Number of questions per round: </span><span class="label-text" id="cardNumberSpan">5</span>
+                          <span class="label-text">Number of questions per stage: </span><span class="label-text" id="cardNumberSpan">5</span>
                         </label>
                         <!-- TODO: make the max dynamic -->
                         <input id="cardNumberRange" name="num_cards" type="range" min="3" max="15" value="5" class="range range-xs range-primary max-w-xs" required/>

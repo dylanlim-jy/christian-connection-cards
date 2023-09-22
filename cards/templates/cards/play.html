@@ -1,38 +1,90 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Christian Connection Cards | Play</title>
-</head>
-<body>
-
-<main class="container">
-    <div class="row text-center justify-content-center">
-        <div class="col">
-            <a href="{% url 'cards:index' %}">Go Home</a>
-            <h1 class="display-4">Let's play.</h1>
-            <p>You chose the following number of cards: {{ num_cards }}</p>
+{% block title %}Play{% endblock title %}
+{% block content %}
+<section class="mx-auto justify-center px-20 max-w-7xl py-20">
+    <!-- <div class="tabs tabs-boxed">
+        <a class="tab tab-active">Stage 1: Belief and Identity</a> 
+        <a class="tab">Stage 2: Community and Relationships</a> 
+        <a class="tab">Stage 3: Purpose and Mission</a>
+      </div> -->
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-desc">Question #<span id="currentQuestionNumber"></span> out of {{ num_cards }}</div>
+            <div class="stat-value">Stage <span id="stageNumber">1</span></div>
         </div>
-        
-        {% if filtered_questions %}
-        <div class="col">
-        <p>Here's all the playable choices:</p>
-        {% for stage, question_list in filtered_questions.items %}
-            <p>{{ stage }}:</p>
-            <ol>
-                {% for question in question_list %}
-                <li>{{ question }}</li>
-                {% endfor %}
-            </ol>
-        {% endfor %}
-        </div>
-        {% endif %}
-    </div>
-</main>
-</body>
-</html>
+      </div>
+    <progress id="progressBar" class="progress progress-primary w-full mb-12" value="1" max="{{ num_cards }}"></progress>
+    
+    <div class="card card-bordered px-20 py-20 min-h-max lg:h-96">
+        <p id="currentQuestion" class="text-5xl font-extrabold text-center my-auto"></p>
+    </div>    
+    <div class="join grid grid-cols-2 mt-12">
+        <button id="previousQuestion" class="join-item btn btn-outline btn-disabled">Previous</button>
+        <button id="nextQuestion" class="join-item btn btn-outline">Next</button>
+      </div>
+    {{ serialised_questions|json_script:"json-data"|safe }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentQuestionIndex = 1;
+            var questions = JSON.parse(JSON.parse(document.getElementById("json-data").textContent));
+            console.log(typeof questions)
+            console.log(questions)
+            console.log(typeof questions[0])
+            console.log(questions[0])
+            
+            const stageNumberElement = document.getElementById('stageNumber');
+            const currentQuestionNumberElement = document.getElementById('currentQuestionNumber');
+            const progressBarElement = document.getElementById('progressBar')
+            const currentQuestionText = document.getElementById('currentQuestion');
+            const previousButton = document.getElementById('previousQuestion');
+            const nextButton = document.getElementById('nextQuestion');
+
+            function updateQuestion() {
+                var currentQuestion = questions.find(a => a.index == currentQuestionIndex);
+                stageNumberElement.innerText = currentQuestion['stage'];
+                currentQuestionNumberElement.innerText = currentQuestion['index'];
+                progressBarElement.setAttribute('value', currentQuestion['index']);
+                currentQuestionText.innerText = currentQuestion['question'];
+                
+                if (currentQuestionIndex > 1) {
+                    previousButton.classList.remove('btn-disabled');
+                } else {
+                    previousButton.classList.add('btn-disabled');
+                };
+
+                if (currentQuestionIndex < parseInt('{{ num_cards }}')) {
+                    nextButton.classList.remove('btn-disabled');
+                    nextButton.innerHTML = 'Next'
+                } else {
+                    nextButton.classList.add('btn-disabled');
+                    nextButton.innerHTML = 'Done!'
+                };
+
+            }
+
+            function handlePreviousClick() {
+                if (currentQuestionIndex > 1) {
+                    currentQuestionIndex--;
+                    updateQuestion();
+                };
+            }
+
+            function handleNextClick() {
+                if (currentQuestionIndex < parseInt('{{ num_cards }}')) {
+                    currentQuestionIndex++;
+                    updateQuestion();
+                };
+            }
+
+            previousButton.addEventListener('click', handlePreviousClick);
+            nextButton.addEventListener('click', handleNextClick);
+
+            updateQuestion();
+        });
+    </script>
+
+</section>
+
+{% endblock content %}
