@@ -14,7 +14,13 @@ def index(request):
         request.session['num_cards'] = request.POST['num_cards']
         return HttpResponseRedirect(reverse('cards:play'))
     
-    return render(request, 'cards/index.html', {})
+    # Randomise hero image selection
+    image_list = ['1.svg', '2.svg', '3.svg', '4.svg']
+    random_image = random.choice(image_list)
+    context = {
+        'random_image': random_image,
+    }
+    return render(request, 'cards/index.html', context)
 
 
 def play(request):
