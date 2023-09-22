@@ -1,35 +1,45 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block title %}Connect with your Christian Family{% endblock title %}
 
-    <title>Christian Connection Cards | Connect with your church family</title>
-</head>
-<body>
-<main class="container">
-    <div class="row text-center justify-content-center">
-        <div class="col">
-            <h1 class="display-4">Hello!</h1>
-            <p>Here's how to play this game.</p>
-            <ol>
-                <li>Choose the number of cards you want to play per stage.</li>
-                <li>Answer the questions that show up on the cards.</li>
-                <li>At the end of the game, write a short note to each other. Don't read it until you have left the room!</li>
-            </ol>
-            <form method="post">
-                {% csrf_token %}
-                <!-- TODO add validation for min and max. Or actually, change it into a dropdown -->
-                <label for="num_cards">Number of cards per stage</label>
-                <input type="text" id="num_cards" name="num_cards" type="number" min="3" max="10" required>
-                <input type="submit" value="Submit">
-            </form>
-            
+{% block content %}
+<section class="mx-auto px-20 min-w-5xl max-w-full py-20">
+    <div class="hero h-fit">
+        <div class="hero-content flex-col lg:flex-row gap-x-8">
+          <img src="{% static 'images/4.svg' %}" class="h-72 w-auto lg:h-auto lg:w-2/6" />
+          <div class="lg:w-4/6 flex-col justify-start">
+            <h1 class="text-5xl font-bold">A church card game designed for real connection.</h1>
+            <p class="mt-4 mb-8">Get real with your brothers and sisters in Christ. Start asking each other questions that go beyond the norm.</p>
+            <div class="card card-bordered p-8">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-control w-full mb-4">
+                        <label class="label flex-row gap-x-2 justify-start">
+                          <span class="label-text">Number of questions per round: </span><span class="label-text" id="cardNumberSpan">5</span>
+                        </label>
+                        <!-- TODO: make the max dynamic -->
+                        <input id="cardNumberRange" name="num_cards" type="range" min="3" max="15" value="5" class="range range-xs range-primary max-w-xs" required/>
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-outline" value="Start Playing"/>
+                </form>
+              </div>
+          </div>
         </div>
-    </div>
-</main>
-</body>
-</html>
+      </div>
+    <!-- Attribution: -->
+    <!-- <p>Illustrations by <a href="https://iconscout.com/contributors/humaaans" target="_blank">Pablo Stanley</a></p> -->
+    <!-- Script to compute range input -->
+    <script>
+        // Get references to the input range and the span element
+        const rangeInput = document.getElementById("cardNumberRange");
+        const rangeValue = document.getElementById("cardNumberSpan");
+      
+        // Add an event listener to the input range
+        rangeInput.addEventListener("input", function() {
+          // Update the text content of the span with the current value of the range
+          rangeValue.textContent = rangeInput.value;
+        });
+      </script>
+</section>
+{% endblock content %}
