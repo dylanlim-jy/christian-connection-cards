@@ -11,19 +11,22 @@
           <div class="lg:w-4/6 flex-col justify-start">
             <h1 class="text-3xl md:text-5xl font-black">A church card game designed for real connection.</h1>
             <p class="mt-4 mb-8">Dive deeper with your brothers and sisters in Christ. Explore and connect through meaningful conversations.</p>
-            <div class="card card-bordered p-8">
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-control w-full mb-4">
-                        <label class="label flex-row gap-x-2 justify-start">
-                          <span class="label-text">Number of questions per stage: </span><span class="label-text" id="cardNumberSpan">{{ default_cards }}</span>
-                        </label>
-                        <!-- TODO: make the max dynamic -->
-                        <input id="cardNumberRange" name="num_cards" type="range" min="3" max="{{ max_cards }}" value="{{ default_cards }}" class="range range-xs range-primary max-w-xs" required/>
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-outline" value="Start Playing"/>
-                </form>
-              </div>
+            <div class="flex flex-row">
+
+              <div class="card card-bordered p-8  min-w-full md:min-w-[50%]">
+                  <form method="post">
+                      {% csrf_token %}
+                      <div class="form-control w-full mb-4">
+                          <label class="label flex-row gap-x-2 justify-start">
+                            <span class="label-text">Number of questions per stage: </span><span class="label-text" id="cardNumberSpan">{{ default_cards }}</span>
+                          </label>
+                          <input id="cardNumberRange" name="num_cards" type="range" min="3" max="{{ max_cards }}" value="{{ default_cards }}" class="range range-xs range-primary max-w-xs" required/>
+                      </div>
+                      <input type="submit" class="btn btn-primary btn-outline mr-4" value="Start Playing"/>
+                      <a href="{% url 'cards:how_to_play' %}" class="text-xs">How do I play?</a>
+                  </form>
+                </div>
+            </div>
           </div>
         </div>
       </div>    

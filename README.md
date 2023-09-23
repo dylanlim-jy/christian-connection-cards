@@ -7,13 +7,13 @@ You can find the Render site [here](https://christian-connection-cards.onrender.
 
 ### TODO
 - Add suggest view with a simple form and read up on [email services](https://docs.djangoproject.com/en/4.2/topics/email/)
+- Disable double tap zoom
 - Add dark mode toggle on sidebar menu
 - Persist dark mode state
-- Add ending view (extra link that's conditionally shown) that shows the final note activity
+- Add ending view (extra link that's conditionally shown) that shows the final note activity - continue button
 
 ### Roadmap
 - Add keyboard shortcuts to index questions
-- Add functionality to swipe through questions on mobile
 - Migrate questions to database
 - Add superuser and users
 - Create models for ratings and register on admin

@@ -3,31 +3,43 @@
 
 {% block title %}Play{% endblock title %}
 {% block content %}
-<section class="mx-auto px-5 md:px-20 min-w-5xl max-w-full py-10">
+<section class="mx-auto px-5 md:px-20 min-w-5xl max-w-full py-10 relative">
     <div class="stats">
         <div class="stat">
             <div class="stat-desc">Question #<span id="currentQuestionNumber"></span> out of {{ num_cards }}</div>
             <div class="text-xl font-black md:text-2xl">Stage <span id="stageNumber">1</span>: <span id="stageDescription">Perception</span></div>
         </div>
-      </div>
+        </div>
+
     <progress id="progressBar" class="progress progress-primary w-full mb-12" value="1" max="{{ num_cards }}"></progress>
     
-    <div class="card card-bordered min-h-max px-5 md:px-10 lg:px-20 py-20 lg:h-96">
+    <div class="card card-bordered min-h-[50vh] px-5 md:px-10 lg:px-20 py-20 lg:h-96">
         <p id="currentQuestion" class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center my-auto"></p>
-    </div>    
-    <div class="join grid grid-cols-2 mt-12">
+    </div>
+    
+    <div class="join grid grid-cols-2 w-full mt-12">
         <button id="previousQuestion" class="join-item btn btn-outline btn-disabled">Previous</button>
         <button id="nextQuestion" class="join-item btn btn-outline">Next</button>
       </div>
+    
+    <dialog id="completionModal" class="modal">
+    <div class="modal-box">
+        <img src="{% static 'images/plant.svg' %}" class="h-32 py-5" alt="Plant">
+        <h3 class="font-bold text-lg">Thank you for playing!</h3>
+        <p class="py-4">You may now proceed to write a note or text to your other player(s). Don't forget - you can only view this note after you leave each other's presence!</p>
+        <div class="modal-action">
+        <form method="dialog">
+            <button class="btn">Close</button>
+        </form>
+        </div>
+    </div>
+    </dialog>
+
     {{ serialised_questions|json_script:"json-data"|safe }}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var currentQuestionIndex = 1;
             var questions = JSON.parse(JSON.parse(document.getElementById("json-data").textContent));
-            console.log(typeof questions)
-            console.log(questions)
-            console.log(typeof questions[0])
-            console.log(questions[0])
             
             const stageNumberElement = document.getElementById('stageNumber');
             const stageDescriptionElement = document.getElementById('stageDescription');
@@ -51,11 +63,13 @@
                 };
 
                 if (currentQuestionIndex < parseInt('{{ num_cards }}')) {
-                    nextButton.classList.remove('btn-disabled');
+                    nextButton.classList.remove('btn-primary');
+                    nextButton.setAttribute('onclick', '')
                     nextButton.innerHTML = 'Next'
                 } else {
-                    nextButton.classList.add('btn-disabled');
-                    nextButton.innerHTML = 'Done!'
+                    nextButton.classList.add('btn-primary');
+                    nextButton.setAttribute('onclick', 'completionModal.showModal()')
+                    nextButton.innerHTML = 'End game'
                 };
 
                 if (currentQuestion['stage'] == 1) {
