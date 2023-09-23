@@ -35,10 +35,11 @@ def index(request):
 
 
 def play(request):
-    num_cards = request.session.get('num_cards', '5')
-    
+    # Define max range for questions
     with open(QUESTIONS_PATH, 'r') as json_file:
         questions = json.load(json_file)
+    max_card_range_number = max_cards(questions)
+    num_cards = request.session.get('num_cards', str(max_card_range_number // 2))
     filtered_questions = generate_questions(questions, int(num_cards))
     
     context = {
