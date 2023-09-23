@@ -17,23 +17,23 @@
         <p id="currentQuestion" class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center my-auto"></p>
     </div>
     
-    <div class="join grid grid-cols-2 w-full mt-12">
-        <button id="previousQuestion" class="join-item btn btn-outline btn-disabled">Previous</button>
-        <button id="nextQuestion" class="join-item btn btn-outline">Next</button>
-      </div>
+    <div class="grid grid-cols-2 w-full mt-12">
+        <button id="previousQuestion" class="btn btn-outline rounded-r-none btn-disabled">Previous</button>
+        <button id="nextQuestion" class="btn btn-outline rounded-l-none">Next</button>
+        <label id="completeModalID" for="completeModal" class="btn btn-primary rounded-l-none hidden">End game</label>
+      </div>    
     
-    <dialog id="completionModal" class="modal">
+    <input type="checkbox" id="completeModal" class="modal-toggle" />
+    <div class="modal">
     <div class="modal-box">
         <img src="{% static 'images/plant.svg' %}" class="h-32 py-5" alt="Plant">
         <h3 class="font-bold text-lg">Thank you for playing!</h3>
         <p class="py-4">You may now proceed to write a note or text to your other player(s). Don't forget - you can only view this note after you leave each other's presence!</p>
         <div class="modal-action">
-        <form method="dialog">
-            <button class="btn">Close</button>
-        </form>
+        <label for="completeModal" class="btn">Close!</label>
         </div>
     </div>
-    </dialog>
+    </div>
 
     {{ serialised_questions|json_script:"json-data"|safe }}
     <script>
@@ -48,6 +48,7 @@
             const currentQuestionText = document.getElementById('currentQuestion');
             const previousButton = document.getElementById('previousQuestion');
             const nextButton = document.getElementById('nextQuestion');
+            const completeModal = document.getElementById('completeModalID');
 
             function updateQuestion() {
                 var currentQuestion = questions.find(a => a.index == currentQuestionIndex);
@@ -63,13 +64,11 @@
                 };
 
                 if (currentQuestionIndex < parseInt('{{ num_cards }}')) {
-                    nextButton.classList.remove('btn-primary');
-                    nextButton.setAttribute('onclick', '')
-                    nextButton.innerHTML = 'Next'
+                    nextButton.classList.remove('hidden');
+                    completeModal.classList.add('hidden');
                 } else {
-                    nextButton.classList.add('btn-primary');
-                    nextButton.setAttribute('onclick', 'completionModal.showModal()')
-                    nextButton.innerHTML = 'End game'
+                    nextButton.classList.add('hidden');
+                    completeModal.classList.remove('hidden');
                 };
 
                 if (currentQuestion['stage'] == 1) {
