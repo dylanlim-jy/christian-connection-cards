@@ -44,6 +44,9 @@ def how_to_play(request):
 def about(request):
     return render(request, 'cards/about.html', {})
 
+def suggest(request):
+    return render(request, 'cards/suggest.html', {})
+
 
 def generate_questions(questions, n):
     random.shuffle(questions)
