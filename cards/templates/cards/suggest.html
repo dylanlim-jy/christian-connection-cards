@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Suggest{% endblock title %}
+{% block content %}
+<section class="mx-auto px-5 md:px-20 min-w-5xl max-w-full py-10">
+    <div class="hero">
+        <div class="hero-content flex-col lg:max-w-3xl lg:flex-row-reverse gap-x-9">
+          <div class="text-center lg:text-left">
+            <h1 class="text-3xl md:text-5xl font-black">Suggest a question!</h1>
+            <p class="py-6">
+                Got an idea to add a question? Fill in the form and we'll consider adding it to our pool! 
+                You will be credited for your contribution :)
+            </p>
+          </div>
+          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Email</span>
+                </label>
+                <input type="text" placeholder="name@email.com" class="input input-bordered" />
+              </div>
+              <div class="form-control w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Question Stage</span>
+                </label>
+                <select class="select select-bordered">
+                  <option disabled selected>select one</option>
+                  <option>Stage 1: Perception</option>
+                  <option>Stage 2: Connection</option>
+                  <option>Stage 3: Edification</option>
+                </select>
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Your suggested question</span>
+                </label>
+                <textarea class="textarea textarea-bordered h-24" placeholder="What Christian topic do you think I would preach really well on?"></textarea>
+              </div>
+              <div class="form-control mt-6">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+{% endblock content %}
