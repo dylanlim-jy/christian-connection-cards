@@ -22,8 +22,10 @@
                           </label>
                           <input id="cardNumberRange" name="num_cards" type="range" min="3" max="{{ max_cards }}" value="{{ default_cards }}" class="range range-xs range-primary max-w-xs" required/>
                       </div>
-                      <input type="submit" class="btn btn-primary btn-outline mr-4" value="Start Playing"/>
-                      <a href="{% url 'cards:how_to_play' %}" class="text-xs">How do I play?</a>
+                      <div class="flex flex-col gap-y-4 lg:flex-row lg:gap-x-4 lg:items-center">
+                        <input type="submit" class="btn btn-primary btn-outline" value="Start Playing"/>
+                        <a href="{% url 'cards:how_to_play' %}" class="text-xs">How do I play?</a>
+                      </div>
                   </form>
                 </div>
             </div>
