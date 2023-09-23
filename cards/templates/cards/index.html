@@ -16,10 +16,10 @@
                     {% csrf_token %}
                     <div class="form-control w-full mb-4">
                         <label class="label flex-row gap-x-2 justify-start">
-                          <span class="label-text">Number of questions per stage: </span><span class="label-text" id="cardNumberSpan">5</span>
+                          <span class="label-text">Number of questions per stage: </span><span class="label-text" id="cardNumberSpan">{{ default_cards }}</span>
                         </label>
                         <!-- TODO: make the max dynamic -->
-                        <input id="cardNumberRange" name="num_cards" type="range" min="3" max="15" value="5" class="range range-xs range-primary max-w-xs" required/>
+                        <input id="cardNumberRange" name="num_cards" type="range" min="3" max="{{ max_cards }}" value="{{ default_cards }}" class="range range-xs range-primary max-w-xs" required/>
                     </div>
                     <input type="submit" class="btn btn-primary btn-outline" value="Start Playing"/>
                 </form>

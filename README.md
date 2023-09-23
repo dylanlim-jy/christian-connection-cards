@@ -7,7 +7,6 @@ You can find the Render site [here](https://christian-connection-cards.onrender.
 
 ### TODO
 - Add suggest view with a simple form and read up on [email services](https://docs.djangoproject.com/en/4.2/topics/email/)
-- Dynamically render the max number of questions the slider allows
 - Add dark mode toggle on sidebar menu
 - Persist dark mode state
 - Add ending view (extra link that's conditionally shown) that shows the final note activity

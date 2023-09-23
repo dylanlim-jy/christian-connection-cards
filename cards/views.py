@@ -2,6 +2,7 @@ import os
 import json
 import random
 import functools
+from collections import Counter
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -18,9 +19,18 @@ def index(request):
     # Randomise hero image selection
     image_list = ['1.svg', '2.svg', '3.svg', '4.svg', '5.svg', '6.svg', '7.svg']
     random_image = random.choice(image_list)
+
+    # Define max range for questions
+    with open(QUESTIONS_PATH, 'r') as json_file:
+        questions = json.load(json_file)
+    max_card_range_number = max_cards(questions)
+
     context = {
         'random_image': random_image,
+        'max_cards': max_card_range_number,
+        'default_cards': max_card_range_number // 2,
     }
+
     return render(request, 'cards/index.html', context)
 
 
@@ -65,3 +75,9 @@ def generate_questions(questions, n):
             question_index+=1
     
     return filtered_questions
+
+def max_cards(questions):
+    stage_occurrences = [question['stage'] for question in questions]
+    stage_counter = Counter(stage_occurrences)
+    max_cards = min(stage_counter.values())
+    return max_cards
