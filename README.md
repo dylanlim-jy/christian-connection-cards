@@ -6,10 +6,11 @@ This game is built using [Django](https://www.djangoproject.com/), [django-tailw
 You can find the Render site [here](https://christian-connection-cards.onrender.com/).
 
 ### TODO
-- Add how to play view
+- Add how to play view and check for responsiveness of tabs
 - Add more images to loop from
 - Add stage description
 - Review questions
+- Add checks for /play view to stop it from breaking if no questions have been selected
 - Add attribution (just on Github?) and Github link (next to darkmode?)
 - Add suggest view with a simple form and read up on email services
 - Dynamically render the max number of questions the slider allows

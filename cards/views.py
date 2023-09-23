@@ -25,7 +25,7 @@ def index(request):
 
 
 def play(request):
-    num_cards = request.session.get('num_cards', None)
+    num_cards = request.session.get('num_cards', '5')
     
     with open(QUESTIONS_PATH, 'r') as json_file:
         questions = json.load(json_file)
