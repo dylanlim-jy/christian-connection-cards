@@ -9,8 +9,8 @@
         <div class="hero-content flex-col lg:flex-row gap-x-9">
           <img src="{% static 'images/' %}{{ random_image }}" alt="Illustration of a human by Pablo Stanley" class="h-72 w-auto lg:h-auto lg:w-2/6" />          
           <div class="lg:w-4/6 flex-col justify-start">
-            <h1 class="text-3xl md:text-5xl font-bold">A church card game designed for real connection.</h1>
-            <p class="mt-4 mb-8">Get real with your brothers and sisters in Christ. Start asking each other questions that go beyond the norm.</p>
+            <h1 class="text-3xl md:text-5xl font-black">A church card game designed for real connection.</h1>
+            <p class="mt-4 mb-8">Dive deeper with your brothers and sisters in Christ. Explore and connect through meaningful conversations.</p>
             <div class="card card-bordered p-8">
                 <form method="post">
                     {% csrf_token %}
@@ -26,9 +26,7 @@
               </div>
           </div>
         </div>
-      </div>
-    <!-- Attribution: -->
-    <!-- <p>Illustrations by <a href="https://iconscout.com/contributors/humaaans" target="_blank">Pablo Stanley</a></p> -->
+      </div>    
     <!-- Script to compute range input -->
     <script>
         // Get references to the input range and the span element

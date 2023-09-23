@@ -4,15 +4,10 @@
 {% block title %}Play{% endblock title %}
 {% block content %}
 <section class="mx-auto px-5 md:px-20 min-w-5xl max-w-full py-10">
-    <!-- <div class="tabs tabs-boxed">
-        <a class="tab tab-active">Stage 1: Belief and Identity</a> 
-        <a class="tab">Stage 2: Community and Relationships</a> 
-        <a class="tab">Stage 3: Purpose and Mission</a>
-      </div> -->
     <div class="stats">
         <div class="stat">
             <div class="stat-desc">Question #<span id="currentQuestionNumber"></span> out of {{ num_cards }}</div>
-            <div class="stat-value">Stage <span id="stageNumber">1</span></div>
+            <div class="stat-value">Stage <span id="stageNumber">1</span> : <span id="stageDescription">Perception</span></div>
         </div>
       </div>
     <progress id="progressBar" class="progress progress-primary w-full mb-12" value="1" max="{{ num_cards }}"></progress>
@@ -35,6 +30,7 @@
             console.log(questions[0])
             
             const stageNumberElement = document.getElementById('stageNumber');
+            const stageDescriptionElement = document.getElementById('stageDescription');
             const currentQuestionNumberElement = document.getElementById('currentQuestionNumber');
             const progressBarElement = document.getElementById('progressBar')
             const currentQuestionText = document.getElementById('currentQuestion');
@@ -60,6 +56,14 @@
                 } else {
                     nextButton.classList.add('btn-disabled');
                     nextButton.innerHTML = 'Done!'
+                };
+
+                if (currentQuestion['stage'] == 1) {
+                    stageDescriptionElement.innerHTML = 'Perception';
+                } else if (currentQuestion['stage'] == 2) {
+                    stageDescriptionElement.innerHTML = 'Connection';
+                } else if (currentQuestion['stage'] == 3) {
+                    stageDescriptionElement.innerHTML = 'Edification';
                 };
 
             }

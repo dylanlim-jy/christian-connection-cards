@@ -16,7 +16,7 @@ def index(request):
         return HttpResponseRedirect(reverse('cards:play'))
     
     # Randomise hero image selection
-    image_list = ['1.svg', '2.svg', '3.svg', '4.svg']
+    image_list = ['1.svg', '2.svg', '3.svg', '4.svg', '5.svg', '6.svg', '7.svg']
     random_image = random.choice(image_list)
     context = {
         'random_image': random_image,
@@ -40,6 +40,9 @@ def play(request):
 
 def how_to_play(request):
     return render(request, 'cards/how_to_play.html', {})
+
+def about(request):
+    return render(request, 'cards/about.html', {})
 
 
 def generate_questions(questions, n):

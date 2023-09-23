@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock title %}
+{% block content %}
+<section class="mx-auto px-5 md:px-20 min-w-5xl max-w-full py-10">
+    <div class="hero">
+        <div class="hero-content text-center">
+            <div>
+                <h1 class="text-3xl md:text-5xl font-black">About Christian Connection Cards</h1>
+                <img src="{% static 'images/about.svg' %}" alt="Illustration of a human by Pablo Stanley" class="h-72 mx-auto lg:h-auto lg:w-2/6" />
+                <p class="pt-10">Christian Connection Cards was developed by Dylan, who had the idea after 
+                    learning about the popular card game 'We're not really strangers'.<br>
+                </p>
+                <p class="py-5">You can access the code on Github <a href="https://github.com/dylanlim-jy/christian-connection-cards" target="_blank">here</a>.<br>
+                    Illustrations by <a href="https://iconscout.com/contributors/humaaans" target="_blank">Pablo Stanley</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
