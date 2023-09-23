@@ -38,6 +38,9 @@ def play(request):
 
     return render(request, 'cards/play.html', context)
 
+def how_to_play(request):
+    return render(request, 'cards/how_to_play.html', {})
+
 
 def generate_questions(questions, n):
     random.shuffle(questions)
