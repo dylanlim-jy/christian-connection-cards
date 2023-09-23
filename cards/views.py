@@ -58,6 +58,14 @@ def about(request):
 def suggest(request):
     return render(request, 'cards/suggest.html', {})
 
+def question_bank(request):
+    with open(QUESTIONS_PATH, 'r') as json_file:
+        questions = json.load(json_file)
+    context = {
+        'questions': questions,
+    }
+    return render(request, 'cards/question_bank.html', context)
+
 
 def generate_questions(questions, n):
     random.shuffle(questions)
