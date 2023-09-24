@@ -8,6 +8,7 @@
         <div class="stat">
             <div class="stat-desc">Question #<span id="currentQuestionNumber"></span> out of {{ num_cards }}</div>
             <div class="text-xl font-black md:text-2xl">Stage <span id="stageNumber">1</span>: <span id="stageDescription">Perception</span></div>
+            <div class="text-xs md:text-base" id="stageDescriptionExtra">Learn how others perceive you and themselves.</div>
         </div>
         </div>
 
@@ -43,6 +44,7 @@
             
             const stageNumberElement = document.getElementById('stageNumber');
             const stageDescriptionElement = document.getElementById('stageDescription');
+            const stageDescriptionExtraElement = document.getElementById('stageDescriptionExtra');
             const currentQuestionNumberElement = document.getElementById('currentQuestionNumber');
             const progressBarElement = document.getElementById('progressBar')
             const currentQuestionText = document.getElementById('currentQuestion');
@@ -72,11 +74,14 @@
                 };
 
                 if (currentQuestion['stage'] == 1) {
-                    stageDescriptionElement.innerHTML = 'Perception';
+                    stageDescriptionElement.innerHTML = "Perception";
+                    stageDescriptionExtraElement.innerHTML = "Learn how others perceive you and themselves.";
                 } else if (currentQuestion['stage'] == 2) {
-                    stageDescriptionElement.innerHTML = 'Connection';
+                    stageDescriptionElement.innerHTML = "Connection";
+                    stageDescriptionExtraElement.innerHTML = "Explore each other's past, present, and hopes for our eternal future.";
                 } else if (currentQuestion['stage'] == 3) {
-                    stageDescriptionElement.innerHTML = 'Edification';
+                    stageDescriptionElement.innerHTML = "Edification";
+                    stageDescriptionExtraElement.innerHTML = "Build and encourage each other up to the image of Christ.";
                 };
 
             }

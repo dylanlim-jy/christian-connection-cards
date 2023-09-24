@@ -23,7 +23,7 @@ def index(request):
     # Define max range for questions
     with open(QUESTIONS_PATH, 'r') as json_file:
         questions = json.load(json_file)
-    max_card_range_number = max_cards(questions)
+    max_card_range_number = max_cards(questions) - (max_cards(questions) % 3)
 
     context = {
         'random_image': random_image,
